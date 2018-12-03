@@ -8,7 +8,7 @@ import en from './lang/en'
 Vue.use(VueI18n)
 
 export default new VueI18n({
-  locale: 'cn',
+  locale: 'en',
   messages: {
     cn,
     ja,

@@ -1,8 +1,8 @@
 <template>
   <d2-container class="page">
     <d2-page-cover
-      :title="`D2 Admin ${version}`"
-      sub-title="优雅的中后台集成方案">
+      :title="`壹点美食 ${version}`"
+      sub-title="手指点一点美食就到手">
       <d2-icon-svg
         class="page__logo"
         name="d2-admin"/>
