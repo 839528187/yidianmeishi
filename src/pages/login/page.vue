@@ -32,6 +32,10 @@
           </el-form>
         </el-card>
       </div>
+      快速登录按钮
+      <el-button size="default" type="info" class="button-help" @click="dialogVisible = true">
+        快速选择用户（测试功能）
+      </el-button>
     </div>
     <el-dialog
       title="快速选择用户"
@@ -59,11 +63,28 @@ export default {
     return {
       // 快速选择用户
       dialogVisible: false,
+      users: [
+        {
+          name: '管理员',
+          username: 'admin',
+          password: 'admin'
+        },
+        {
+          name: '编辑',
+          username: 'editor',
+          password: 'editor'
+        },
+        {
+          name: '用户1',
+          username: 'user1',
+          password: 'user1'
+        }
+      ],
       // 表单
       formLogin: {
         username: '',
         password: '',
-        code: ''
+        code: 'v9am'
       },
       // 校验
       rules: {
@@ -85,6 +106,8 @@ export default {
   },
   beforeDestroy () {
     // 销毁 particlesJS
+    // thanks https://github.com/d2-projects/d2-admin/issues/65
+    // ref https://github.com/VincentGarreau/particles.js/issues/63
     if (pJSDom && pJSDom.length > 0) {
       pJSDom[0].pJS.fn.vendors.destroypJS()
       pJSDom = []
