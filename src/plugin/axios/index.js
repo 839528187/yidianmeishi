@@ -33,7 +33,7 @@ function errorLog (err) {
 
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: process.env.VUE_APP_API,
+  baseURL: 'http://localhost:8028',
   timeout: 5000 // 请求超时时间
 })
 
@@ -71,7 +71,7 @@ service.interceptors.response.use(
     } else {
       // 有 code 代表这是一个后端接口 可以进行进一步的判断
       switch (code) {
-        case 0:
+        case 200:
           // [ 示例 ] code === 0 代表没有错误
           return dataAxios.data
         case 'xxx':
