@@ -6,10 +6,6 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'App'
 }
 </script>
-
-<style lang="scss">
-@import '~@/assets/style/public-class.scss';
-</style>
