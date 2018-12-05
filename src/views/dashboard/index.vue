@@ -39,10 +39,7 @@ export default {
 
   methods: {
 
-    async getInfo() {
-      var data = await indexs()
-      this.tj = data.data
-    }
+
   }
 
 }

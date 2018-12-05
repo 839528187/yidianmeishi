@@ -87,7 +87,6 @@
 
 <script>
 import { create, findOne, update } from '@/api/news'
-import { schoolSearch } from '@/api/school'
 import { newsSearch } from '@/api/category'
 import Sticky from '@/components/Sticky' // 粘性header组件
 import MDinput from '@/components/MDinput'
@@ -179,13 +178,6 @@ export default {
   },
 
   methods: {
-    // 查询学校
-    getSchoolSearch(val) {
-      this.schoolSearchName.schoolName = val
-      schoolSearch(this.schoolSearchName).then(data => {
-        this.school = data.data
-      })
-    },
 
     skipNewsList() {
       this.$router.push('/news/list')

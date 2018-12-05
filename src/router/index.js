@@ -41,72 +41,6 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/cache',
-    component: Layout,
-    redirect: '/cache',
-    // name: '主页',
-    // hidden: true,
-    meta: { title: '更新缓存' },
-    children: [{
-      path: '/cache',
-      name: '更新缓存',
-      component: () => import('@/views/cache/index'),
-      meta: { title: '更新缓存', icon: 'homes' }
-    }]
-  },
-
-  {
-    path: '/school',
-    component: Layout,
-    redirect: '/school/list',
-    name: '学校管理',
-    meta: { title: '学校管理', icon: 'school' },
-    children: [
-      {
-        path: '/school/list',
-        name: '学校列表',
-        component: () => import('@/views/school/index'),
-        meta: { title: '学校列表', icon: 'lists' }
-      },
-      {
-        path: '/school/create',
-        name: '添加学校',
-        hidden: true,
-        component: () => import('@/views/school/operating'),
-        meta: { title: '添加学校', icon: 'list' }
-      },
-      {
-        path: '/school/create/:id',
-        name: '编辑学校',
-        hidden: true,
-        component: () => import('@/views/school/operating'),
-        meta: { title: '编辑学校', icon: 'list' }
-      },
-      {
-        path: '/school/type',
-        name: '学校类别',
-        // hidden: true,
-        component: () => import('@/views/type/index'),
-        meta: { title: '学校类别', icon: 'cate' }
-      },
-      {
-        path: '/school/milieu/:id',
-        name: '学校环境',
-        hidden: true,
-        component: () => import('@/views/milieus/index'),
-        meta: { title: '学校环境', icon: 'school' }
-      },
-      {
-        path: '/school/present/:id',
-        name: '学校专业',
-        hidden: true,
-        component: () => import('@/views/present/index'),
-        meta: { title: '学校专业', icon: 'school' }
-      }
-    ]
-  },
-
-  {
     path: '/news',
     component: Layout,
     redirect: '/news/list',
@@ -139,32 +73,6 @@ export const constantRouterMap = [
         // hidden: true,
         component: () => import('@/views/category/index'),
         meta: { title: '资讯分类', icon: 'list' }
-      }
-    ]
-  },
-
-  {
-    path: '/leave',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: '留言管理',
-        component: () => import('@/views/leave/index'),
-        meta: { title: '留言管理', icon: 'leave' }
-      }
-    ]
-  },
-
-  {
-    path: '/area',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: '地区管理',
-        component: () => import('@/views/area/index'),
-        meta: { title: '地区管理', icon: 'addr' }
       }
     ]
   },

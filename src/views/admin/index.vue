@@ -18,7 +18,7 @@
       style="width: 100%;">
       <el-table-column label="id" prop="id" align="center" width="60px"/>
       <el-table-column label="用户名" prop="username" align="center"/>
-      <el-table-column label="创建时间" prop="createdAt" align="center"/>
+      <el-table-column label="创建时间" prop="createTime" align="center"/>
       <el-table-column label="状态" prop="status" align="center">
         <template slot-scope="scope">
           {{ scope.row.status == 1 ? '正常' : '待审核' }}
@@ -117,7 +117,7 @@ export default {
         username: '',
         password: '',
         status: '',
-        createdAt: '',
+        createTime: '',
         keyword: '',
         oldPassword: ''
       },

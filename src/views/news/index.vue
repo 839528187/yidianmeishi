@@ -85,7 +85,6 @@
 
 <script>
 import { list, deletes } from '@/api/news'
-import { schoolSearch } from '@/api/school'
 import { newsSearch } from '@/api/category'
 export default {
   data() {
@@ -179,14 +178,6 @@ export default {
     // 跳转到编辑新闻
     updateNews(id) {
       this.$router.push('/news/operation/' + id)
-    },
-
-    // 查询学校
-    getSchoolSearch(val) {
-      this.schoolSearchName.schoolName = val
-      schoolSearch(this.schoolSearchName).then(data => {
-        this.school = data.data
-      })
     },
 
     // 查询分类
