@@ -22,8 +22,8 @@ Vue.config.productionTip = false
 // Vue.prototype.uploadUrl = 'http://api.cqjxw.net/upload'
 // Vue.prototype.entourageUrl = 'http://api.cqjxw.net/entourage/img'
 
-Vue.prototype.uploadUrl = 'http://localhost:9528/upload'
-Vue.prototype.entourageUrl = 'http://localhost:9528/entourage/img'
+Vue.prototype.uploadUrl = 'http://localhost:8028/upload'
+Vue.prototype.entourageUrl = 'http://localhost:8028/entourage/img'
 new Vue({
   el: '#app',
   router,

@@ -2,9 +2,9 @@
   <div class="app-container">
     <div class="filter-container">
       <el-button size="small" type="primary" plain @click="handleCreate">添加分类</el-button>
-      <el-select v-model="listQuery.parentId" size="small" clearable placeholder="请选择上级分类" style="width: 200px; margin-left: 10px; margin-bottom:1px;" @clear="getList" @change="getList">
+      <!-- <el-select v-model="listQuery.parentId" size="small" clearable placeholder="请选择上级分类" style="width: 200px; margin-left: 10px; margin-bottom:1px;" @clear="getList" @change="getList">
         <el-option v-for="lo in cateList" :label="lo.cateName" :value="lo.id" :key="lo.id"/>
-      </el-select>
+      </el-select> -->
       <el-input v-model="listQuery.keyword" size="small" clearable placeholder="请输入分类名称" style="width: 200px; margin-left: 10px; margin-bottom:1px;" class="filter-item" @blur="getList" @clear="getList"/>
     </div>
 
@@ -19,9 +19,8 @@
       highlight-current-row
       style="width: 100%;">
       <el-table-column label="id" prop="id" align="center" width="60px"/>
-      <el-table-column label="分类名称" prop="cateName" align="center"/>
-      <el-table-column label="所属上级" prop="parentName" align="center"/>
-      <el-table-column label="创建时间" prop="createdAt" align="center"/>
+      <el-table-column label="分类名称" prop="name" align="center"/>
+      <el-table-column label="创建时间" prop="createTime" align="center"/>
       <el-table-column label="状态" prop="status" align="center">
         <template slot-scope="scope">
           {{ scope.row.status == 1 ? '正常' : '待审核' }}
@@ -61,13 +60,8 @@
     <!-- 弹出框 -->
     <el-dialog :title="dialogStatus" :visible.sync="dialogFormVisible" style="width: 1110px; margin-left: auto; margin-right: auto;">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item label-width="83px" label="上级分类:" prop="parentId" class="postInfo-container-item">
-          <el-select v-model="temp.parentId" placeholder="请选择上级分类">
-            <el-option v-for="lo in cateList" :label="lo.cateName" :value="lo.id" :key="lo.id"/>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="分类名称" prop="cateName" label-width="80px">
-          <el-input v-model="temp.cateName" value="cateName" placeholder="分类名称"/>
+        <el-form-item label="分类名称" prop="name" label-width="80px">
+          <el-input v-model="temp.name" value="name" placeholder="分类名称"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -80,7 +74,7 @@
 </template>
 
 <script>
-import { list, create, update, parentSearch, deletes } from '@/api/category'
+import { list, create, update, deletes } from '@/api/category'
 export default {
   // 数据
   data() {
@@ -100,26 +94,21 @@ export default {
       },
       temp: {
         id: '',
-        cateName: '',
+        name: '',
         parentId: '',
-        parentName: '',
         status: '',
-        createdAt: '',
+        createTime: '',
         keyword: ''
       },
       rules: {
         cateName: [
           { required: true, message: '分类名称不能为空', trigger: 'change' }
-        ],
-        parentId: [
-          { required: true, message: '所属上级不能为空', trigger: 'change' }
         ]
       }
     }
   },
   created() {
     this.getList()
-    this.getParent()
   },
 
   // 方法
@@ -154,9 +143,8 @@ export default {
     resetTemp() {
       this.temp = {
         id: '',
-        cateName: '',
+        name: '',
         parentId: '',
-        parenName: '',
         status: '',
         createTime: ''
       }
@@ -217,15 +205,6 @@ export default {
             }
           })
         }
-      })
-    },
-
-    // 根据上级分类查询下级分类
-    getParent() {
-      parentSearch().then(data => {
-        data.data.unshift({ cateName: '顶级分类', id: 0 })
-        this.cateList = data.data
-        this.temp.parentId = 0
       })
     },
 

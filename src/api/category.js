@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function list(query) {
   return request({
-    url: '/category',
+    url: '/cate',
     method: 'get',
     params: query
   })
@@ -10,7 +10,7 @@ export function list(query) {
 
 export function create(data) {
   return request({
-    url: '/category',
+    url: '/cate',
     method: 'post',
     data
   })
@@ -18,29 +18,22 @@ export function create(data) {
 
 export function update(data, id) {
   return request({
-    url: '/category/' + id,
+    url: '/cate/' + id,
     method: 'put',
     data
   })
 }
 
-export function parentSearch() {
-  return request({
-    url: '/category/parent',
-    method: 'get'
-  })
-}
-
 export function deletes(id) {
   return request({
-    url: '/category/' + id,
+    url: '/cate/' + id,
     method: 'delete'
   })
 }
 
 export function newsSearch() {
   return request({
-    url: '/category/search',
+    url: '/cate/each',
     method: 'get'
   })
 }

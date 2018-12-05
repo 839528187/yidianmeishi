@@ -22,23 +22,11 @@
             <div class="postInfo-container">
               <el-row>
                 <el-col :span="7">
-                  <el-form-item label="所属学校:" size="small" prop="schoolId" class="postInfo-container-item">
-                    <el-select
-                      v-model="temp.schoolId"
-                      :remote-method="getSchoolSearch"
-                      :loading="loading"
-                      :value-key="schoolSearchName.schoolName"
-                      filterable
-                      clearable
-                      remote
-                      reserve-keyword
-                      placeholder="请输入学校名称搜索">
-                      <el-option
-                        v-for="item in school"
-                        :key="item.id"
-                        :label="item.name"
-                        :value="item.id"/>
-                    </el-select>
+                  <el-form-item label="是否推荐:" size="small" prop="isRecommend" class="postInfo-container-item">
+                    <el-radio-group v-model="temp.isRecommend" size="medium">
+                      <el-radio border label="1">推荐</el-radio>
+                      <el-radio border label="2">不推荐</el-radio>
+                    </el-radio-group>
                   </el-form-item>
                 </el-col>
                 <el-col :span="8">
@@ -123,11 +111,7 @@ export default {
     return {
       postForm: Object.assign({}, defaultForm),
       loading: false,
-      school: [],
       category: [],
-      schoolSearchName: {
-        'schoolName': ''
-      },
       actionUrl: this.uploadUrl, // 上传图片链接
       temp: {
         id: '',
@@ -140,7 +124,8 @@ export default {
         author: '',
         centent: '',
         imgUrl: '',
-        urlThumb: ''
+        urlThumb: '',
+        isRecommend:'2'
       },
 
       uploadHeaders: {
@@ -188,11 +173,7 @@ export default {
       newsSearch().then(data => {
         this.category = data.data
         this.category.forEach(e => {
-          e.children.forEach(i => {
-            if (i.value === this.temp.categoryId) {
-              this.category_check = [e.value, i.value]
-            }
-          })
+          this.category_check = [e.value]
         })
       })
     },
@@ -232,8 +213,8 @@ export default {
       this.listLoading = true
       findOne(this.$route.params.id).then(response => {
         this.temp = response.data // copy obj
-        // Just to simulate the time of the request
-        this.school.unshift({ id: response.data.schoolId, name: response.data.schoolName })
+        this.temp.isRecommend = JSON.stringify(this.temp.isRecommend)
+        // Just to simulate the time of the request 
         setTimeout(() => {
           this.listLoading = false
         }, 1.5 * 200)

@@ -2,26 +2,6 @@
   <div class="app-container">
     <div class="filter-container">
       <el-button size="small" type="primary" plain @click="createNews()">添加新闻</el-button>
-      <el-select
-        v-model="listQuery.schoolId"
-        :remote-method="getSchoolSearch"
-        :loading="listLoading"
-        :value-key="schoolSearchName.schoolName"
-        style="width: 200px; margin-left: 10px; margin-bottom:1px;"
-        size="small"
-        filterable
-        remote
-        clearable
-        reserve-keyword
-        placeholder="请输入学校名称搜索"
-        @change="getList"
-        @clear="getList">
-        <el-option
-          v-for="item in school"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id"/>
-      </el-select>
       <el-cascader :options="category" style="width: 210px; margin-left: 10px; margin-bottom:1px;" size="small" clearable placeholder="分类搜索-可以搜索分类名称" filterable @change="changeCategory"/>
       <el-input v-model="listQuery.keywords" clearable size="small" placeholder="请输入新闻标题" style="width: 200px; margin-left: 10px; margin-bottom:1px;" class="filter-item" @blur="getList" @clear="getList"/>
       <!-- <el-button size="small" type="primary" style="margin-left: 10px; margin-bottom:1px;" plain @click="getList">搜索</el-button> -->
@@ -44,14 +24,18 @@
         </template>
       </el-table-column>
       <el-table-column label="标题" prop="title" align="center"/>
-      <el-table-column label="所属学校" prop="schoolName" align="center"/>
       <el-table-column label="所属分类" prop="categoryName" align="center"/>
+      <el-table-column label="是否推荐" prop="isRecommend" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.isRecommend == 2 ? '不推荐' : '推荐' }}
+        </template>
+      </el-table-column>
       <el-table-column label="状态" prop="status" align="center">
         <template slot-scope="scope">
           {{ scope.row.status == 2 ? '停用' : '正常' }}
         </template>
       </el-table-column>
-      <el-table-column label="添加时间" prop="createdAt" align="center"/>
+      <el-table-column label="添加时间" prop="createTime" align="center"/>
       <el-table-column label="操作" prop="status" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-row>
@@ -93,16 +77,12 @@ export default {
       list: null,
       total: null,
       listLoading: true,
-      schoolSearchName: {
-        schoolName: ''
-      },
       school: [],
       category: [],
       listQuery: {
         page: 1,
         limit: 10,
         keywords: '',
-        schoolId: '',
         categoryId: ''
       },
       temp: {
@@ -110,11 +90,10 @@ export default {
         title: '',
         thumb: '',
         status: '',
-        createdAt: '',
-        schoolId: '',
+        createTime: '',
         categoryId: '',
-        schoolName: '',
-        categoryName: ''
+        categoryName:'',
+        isRecommend:''
       }
     }
   },

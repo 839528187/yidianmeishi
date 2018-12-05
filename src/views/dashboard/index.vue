@@ -33,9 +33,6 @@ export default {
       }
     }
   },
-  created() {
-    this.getInfo()
-  },
 
   methods: {
 

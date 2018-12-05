@@ -150,7 +150,6 @@ export default {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
           create(this.temp).then(data => {
-            this.list.unshift(this.temp)
             this.dialogFormVisible = false
             if (data.code === 200) {
               this.$message({
