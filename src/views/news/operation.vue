@@ -173,7 +173,9 @@ export default {
       newsSearch().then(data => {
         this.category = data.data
         this.category.forEach(e => {
-          this.category_check = [e.value]
+          if(e.value === this.temp.categoryId) {
+              this.category_check = [e.value]
+          }
         })
       })
     },
