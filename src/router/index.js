@@ -103,6 +103,26 @@ export const constantRouterMap = [
         hidden: true,
         component: () => import('@/views/topic/operation'),
         meta: { title: '编辑专题', icon: 'list' }
+      },
+      {
+        path: '/topicDetails/list',
+        name: '专题菜品',
+        component: () => import('@/views/topicDetails/index'),
+        meta: { title: '专题菜品', icon: 'lists' }
+      },
+      {
+        path: '/topicDetails/operation',
+        name: '添加专题菜品',
+        hidden: true,
+        component: () => import('@/views/topicDetails/operation'),
+        meta: { title: '添加专题菜品', icon: 'list' }
+      },
+      {
+        path: '/topicDetails/operation/:id',
+        name: '编辑专题菜品',
+        hidden: true,
+        component: () => import('@/views/topicDetails/operation'),
+        meta: { title: '编辑专题菜品', icon: 'list' }
       }
     ]
   },

@@ -15,7 +15,7 @@
               </MDinput>
             </el-form-item>
             <el-form-item style="margin-bottom: 40px;" prop="seoTitle">
-              <MDinput v-model="temp.seoTitle" :maxlength="100" placeholder="每个关键词用空格隔开" value="seoTitle" name="name" required>
+              <MDinput v-model="temp.seoTitle" :maxlength="100" placeholder="专题seo标题" value="seoTitle" name="name" required>
                 专题seo标题
               </MDinput>
             </el-form-item>
@@ -25,9 +25,10 @@
               </MDinput>
             </el-form-item>
             <el-form-item style="margin-bottom: 40px;" prop="seoDescription">
-              <MDinput v-model="temp.seoDescription" :maxlength="1000" placeholder="每个关键词用空格隔开" value="seoDescription" name="name" required>
-                专题seo描述
-              </MDinput>
+              专题seo描述:
+              <el-input type="textarea" :rows="5" placeholder="专题seo描述" v-model="temp.seoDescription" label="专题seo描述" name="name" required></el-input>
+              <!-- <MDinput v-model="temp.seoDescription" :maxlength="1000" placeholder="每个关键词用空格隔开" value="seoDescription" name="name" required> -->
+              <!-- </MDinput> -->
             </el-form-item>
             <el-form-item label="专题顶部banner图片:" prop="banner">
               <el-upload
