@@ -123,6 +123,13 @@ export const constantRouterMap = [
         hidden: true,
         component: () => import('@/views/topicDetails/operation'),
         meta: { title: '编辑专题菜品', icon: 'list' }
+      },
+      {
+        path: '/atlas/list/:id',
+        name: '上传菜品图集',
+        hidden: true,
+        component: () => import('@/views/atlas/index'),
+        meta: { title: '上传菜品图集', icon: 'list' }
       }
     ]
   },

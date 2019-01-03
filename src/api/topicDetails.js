@@ -30,3 +30,18 @@ export function update(id, data) {
     data
   })
 }
+
+export function banners(id, data) {
+  return request({
+    url: '/topicDetails/banner/' + id,
+    method: 'put',
+    data
+  })
+}
+
+export function deletes(id) {
+  return request({
+    url: '/topicDetails/' + id,
+    method: 'delete'
+  })
+}

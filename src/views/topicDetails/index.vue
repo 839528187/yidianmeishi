@@ -38,8 +38,10 @@
       <el-table-column label="操作" prop="status" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-row>
-            <el-button type="text" circle @click="updateTopic(scope.row.id)">编辑</el-button>
-            <el-button type="text" circle @click="changeDelete(scope.row.id)">删除</el-button>
+            <el-button style="padding: 12px 6px;" type="text" circle @click="handleUpdateBanner(scope.row)">上传banner</el-button>
+            <el-button style="padding: 12px 6px;" type="text" circle @click="updateTopic(scope.row.id)">编辑</el-button>
+            <el-button style="padding: 12px 6px;" type="text" circle @click="milieu(scope.row.id)">图集</el-button>
+            <el-button style="padding: 12px 6px;" type="text" circle @click="changeDelete(scope.row.id)">删除</el-button>
           </el-row>
         </template>
       </el-table-column>
@@ -63,11 +65,35 @@
         @current-change="handleCurrentChange"/>
     </div>
 
+    <!-- 弹出框 -->
+    <el-dialog :title="dialogStatus" :visible.sync="dialogFormVisible" style="width: 1110px; margin-left: auto; margin-right: auto;">
+      <el-form ref="dataForm" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
+        <el-form-item label="缩略图:" prop="banner">
+          <el-upload
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload"
+            :data="datas"
+            :headers="uploadHeaders"
+            :action="actionUrl"
+            class="avatar-uploader">
+            <img v-if="temp.banner" :src="temp.banner" class="avatar" style="width:100%;">
+            <i v-else class="el-icon-plus avatar-uploader-icon"/>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="updateData()">提交</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { list } from '@/api/topicDetails'
+import { list, banners, deletes } from '@/api/topicDetails'
+import { getToken } from '@/utils/auth'
 export default {
   data() {
     return {
@@ -75,6 +101,10 @@ export default {
       list: null,
       total: null,
       listLoading: true,
+      dialogFormVisible: false,
+      actionUrl: this.uploadUrl, // 上传图片链接
+      dusabked: false,
+      dialogStatus: '更新banner图',
       listQuery: {
         page: 1,
         limit: 10,
@@ -87,10 +117,27 @@ export default {
         status: '',
         title:'',
         thumb:'',
+        banner:'',
         heat:'',
         topicName:'',
         createTime: '',
-      }
+        urlThumb:'',
+        bannerUrl:'',
+        thumbUrl:''
+      },
+
+      upload: {
+        imgUrl: '',
+        url: ''
+      },
+
+      uploadHeaders: {
+        'usertoken': getToken()
+      },
+
+      datas: {
+        'location': 'topicDetails'
+      },
     }
   },
 
@@ -118,9 +165,75 @@ export default {
       })
     },
 
+    milieu(id) {
+      this.$router.push('/atlas/list/' + id)
+    },
+
     //删除专题
     changeDelete(id) {
       this.$confirm('此操作将删除该专题吗, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deletes(id).then(data => {
+          if (data.code === 200) {
+            this.$message({
+              type: 'success',
+              message: data.msg
+            })
+            this.getList()
+          } else {
+            return false
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+
+    resetTemp() {
+      this.temp = {
+        id: '',
+        banner: '',
+      }
+    },
+
+    handleUpdateBanner(row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.dialogFormVisible = true
+      this.dusabked = true
+      this.$nextTick(() => {
+        this.$refs['dataForm']
+      })
+    },
+    updateData() {
+      this.$refs['dataForm'].validate(valid => {
+        if (valid) {
+          this.temp.banner = this.temp.bannerUrl
+          this.temp.thumb = this.temp.thumbUrl
+          banners(this.temp.id, this.temp).then(data => {
+            this.list.unshift(this.temp)
+            this.dialogFormVisible = false
+            if (data.code === 200) {
+              this.$message({
+                type: 'success',
+                message: data.msg
+              })
+              this.getList()
+            } else {
+              return false
+            }
+          })
+        }
+      })
+    },
+
+    changeDelete(id) {
+      this.$confirm('你确定要删除吗？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -165,6 +278,21 @@ export default {
     handleCurrentChange(val) {
       this.listQuery.page = val
       this.getList()
+    },
+    handleAvatarSuccess(res, file) {
+      this.upload.url = res.data.url
+      this.temp.imgUrl = res.data.imgUrl
+      this.temp.banner = res.data.url + res.data.imgUrl
+      this.temp.bannerUrl = res.data.imgUrl
+      // this.upload.imgUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+    //   const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isLt2M) {
+        this.$msg.error('上传图片大小不能超过 2MB!')
+      }
+      return isLt2M
     }
   }
 
