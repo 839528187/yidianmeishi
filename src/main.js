@@ -19,8 +19,8 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
-// Vue.prototype.uploadUrl = 'http://api.cqjxw.net/upload'
-// Vue.prototype.entourageUrl = 'http://api.cqjxw.net/entourage/img'
+// Vue.prototype.uploadUrl = 'http://api.meishiadd.com/upload'
+// Vue.prototype.entourageUrl = 'http://api.meishiadd.com/entourage/img'
 
 Vue.prototype.uploadUrl = 'http://localhost:8028/upload'
 Vue.prototype.entourageUrl = 'http://localhost:8028/entourage/img'

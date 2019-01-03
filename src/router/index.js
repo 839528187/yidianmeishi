@@ -78,6 +78,36 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/topic',
+    component: Layout,
+    redirect: '/topic/list',
+    name: '专题管理',
+    meta: { title: '专题管理', icon: 'news' },
+    children: [
+      {
+        path: '/topic/list',
+        name: '专题列表',
+        component: () => import('@/views/topic/index'),
+        meta: { title: '专题列表', icon: 'lists' }
+      },
+      {
+        path: '/topic/operation',
+        name: '添加专题',
+        hidden: true,
+        component: () => import('@/views/topic/operation'),
+        meta: { title: '添加专题', icon: 'list' }
+      },
+      {
+        path: '/topic/operation/:id',
+        name: '编辑专题',
+        hidden: true,
+        component: () => import('@/views/topic/operation'),
+        meta: { title: '编辑专题', icon: 'list' }
+      }
+    ]
+  },
+
+  {
     path: '/links',
     component: Layout,
     children: [
