@@ -23,7 +23,7 @@
 
     <!--上传图集输入名称-->
     <div v-if="entourageListVisible">
-      <el-dialog :visible.sync="entourageListVisible" title="上传图集" style="width: 50%; margin-left: auto; margin-right: auto;">
+      <el-dialog :visible.sync="entourageListVisible" title="上传图集" style="width: 1110px; margin-left: auto; margin-right: auto;">
         <el-form ref="dataForm" :model="datas" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
           <el-form-item label="图集名称" prop="title">
             <el-input v-model="datas.title" value="title" placeholder="图集名称"/>

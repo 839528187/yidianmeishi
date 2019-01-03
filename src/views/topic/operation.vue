@@ -39,7 +39,7 @@
                 :headers="uploadHeaders"
                 :action="actionUrl"
                 class="avatar-uploader">
-                <img v-if="temp.banner" :src="temp.banner" class="avatar">
+                <img v-if="temp.banner" :src="temp.banner" class="avatar" style="width:100%;">
                 <i v-else class="el-icon-plus avatar-uploader-icon"/>
               </el-upload>
             </el-form-item>
