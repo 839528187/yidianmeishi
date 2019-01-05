@@ -24,6 +24,11 @@
                 专题seo关键词
               </MDinput>
             </el-form-item>
+             <el-form-item style="margin-bottom: 40px;" prop="bannerColor">
+              <MDinput v-model="temp.bannerColor" :maxlength="100" placeholder="每个关键词用空格隔开" value="bannerColor" name="name" required>
+                专题banner底层色
+              </MDinput>
+            </el-form-item>
             <el-form-item style="margin-bottom: 40px;" prop="seoDescription">
               专题seo描述:
               <el-input type="textarea" :rows="5" placeholder="专题seo描述" v-model="temp.seoDescription" label="专题seo描述" name="name" required></el-input>
@@ -39,7 +44,7 @@
                 :headers="uploadHeaders"
                 :action="actionUrl"
                 class="avatar-uploader">
-                <img v-if="temp.banner" :src="temp.banner" class="avatar">
+                <img v-if="temp.banner" :src="temp.banner" class="avatar" style="width:100%;">
                 <i v-else class="el-icon-plus avatar-uploader-icon"/>
               </el-upload>
             </el-form-item>
@@ -93,7 +98,8 @@ export default {
         seoKeyword: '',
         seoDescription: '',
         banner: '',
-        urlThumb:''
+        urlThumb:'',
+        bannerColor:''
       },
 
       uploadHeaders: {
@@ -116,6 +122,7 @@ export default {
         seoTitle: [{ required: true, message: '专题seo标题不能为空', trigger: 'change' }],
         seoKeyword: [{ required: true, message: '专题seo关键词不能为空', trigger: 'change' }],
         seoDescription: [{ required: true, message: '专题描述不能为空', trigger: 'change' }],
+        bannerColor: [{ required: true, message: '专题banner底色不能为空', trigger: 'change' }],
         banner: [{ required: true, message: '专题banner图片不能为空', trigger: 'change' }]
       }
     }

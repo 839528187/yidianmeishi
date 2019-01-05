@@ -24,6 +24,11 @@
                 关键词
               </MDinput>
             </el-form-item>
+            <el-form-item style="margin-bottom: 40px;" prop="bannerColor">
+              <MDinput v-model="temp.bannerColor" :maxlength="100" placeholder="每个关键词用空格隔开" value="bannerColor" name="name" required>
+                专题banner底层色
+              </MDinput>
+            </el-form-item>
             <el-form-item style="margin-bottom: 40px;" prop="description">
               描述:
               <el-input type="textarea" :rows="5" placeholder="专题seo描述" v-model="temp.description" label="专题seo描述" name="name" required></el-input>
@@ -120,6 +125,7 @@ const defaultForm = {
   efficacy:'',
   phase:'',
   nutritional:'',
+  bannerColor:'',
   id: undefined,
   platforms: ['a-platform'],
   comment_disabled: false,
@@ -156,7 +162,8 @@ export default {
         efficacy:'',
         phase:'',
         nutritional:'',
-        urlThumb:''
+        urlThumb:'',
+        bannerColor:''
       },
 
       uploadHeaders: {
@@ -187,6 +194,7 @@ export default {
         efficacy: [{ required: true, message: '功效不能为空', trigger: 'change' }],
         phase: [{ required: true, message: '相克不能为空', trigger: 'change' }],
         nutritional: [{ required: true, message: '营养价值不能为空', trigger: 'change' }],
+        bannerColor: [{ required: true, message: 'banner底色不能为空', trigger: 'change' }],
       }
     }
   },

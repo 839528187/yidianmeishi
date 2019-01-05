@@ -38,10 +38,10 @@
       <el-table-column label="操作" prop="status" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-row>
-            <el-button style="padding: 12px 6px;" type="text" circle @click="handleUpdateBanner(scope.row)">上传banner</el-button>
-            <el-button style="padding: 12px 6px;" type="text" circle @click="updateTopic(scope.row.id)">编辑</el-button>
-            <el-button style="padding: 12px 6px;" type="text" circle @click="milieu(scope.row.id)">图集</el-button>
-            <el-button style="padding: 12px 6px;" type="text" circle @click="changeDelete(scope.row.id)">删除</el-button>
+            <el-button style="padding: 12px 1px;" type="text" circle @click="handleUpdateBanner(scope.row)">上传banner</el-button>
+            <el-button style="padding: 12px 1px;" type="text" circle @click="updateTopic(scope.row.id)">编辑</el-button>
+            <el-button style="padding: 12px 1px;" type="text" circle @click="milieu(scope.row.id)">图集</el-button>
+            <el-button style="padding: 12px 1px;" type="text" circle @click="changeDelete(scope.row.id)">删除</el-button>
           </el-row>
         </template>
       </el-table-column>
