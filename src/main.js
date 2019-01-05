@@ -20,7 +20,7 @@ Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
 // Vue.prototype.uploadUrl = 'http://api.meishiadd.com/upload'
-// Vue.prototype.entourageUrl = 'http://api.meishiadd.com/atlas'
+// Vue.prototype.atlasUrl = 'http://api.meishiadd.com/atlas'
 
 Vue.prototype.uploadUrl = 'http://localhost:8028/upload'
 Vue.prototype.atlasUrl = 'http://localhost:8028/atlas'
