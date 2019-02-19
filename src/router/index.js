@@ -135,6 +135,36 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/food',
+    component: Layout,
+    redirect: '/food/index',
+    name: '食物相克',
+    meta: { title: '食物相克', icon: 'news' },
+    children: [
+      {
+        path: '/food/list',
+        name: '食物相克列表',
+        component: () => import('@/views/food/index'),
+        meta: { title: '食物相克列表', icon: 'lists' }
+      },
+      {
+        path: '/food/operation',
+        name: '添加食物相克',
+        hidden: true,
+        component: () => import('@/views/food/operation'),
+        meta: { title: '添加食物相克', icon: 'list' }
+      },
+      {
+        path: '/food/operation/:id',
+        name: '编辑食物相克',
+        hidden: true,
+        component: () => import('@/views/food/operation'),
+        meta: { title: '编辑食物相克', icon: 'list' }
+      }
+    ]
+  },
+
+  {
     path: '/links',
     component: Layout,
     children: [
