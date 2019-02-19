@@ -143,9 +143,9 @@ export const constantRouterMap = [
     children: [
       {
         path: '/food/list',
-        name: '食物相克列表',
+        name: '食物相克',
         component: () => import('@/views/food/index'),
-        meta: { title: '食物相克列表', icon: 'lists' }
+        meta: { title: '食物相克', icon: 'lists' }
       },
       {
         path: '/food/operation',

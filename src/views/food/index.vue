@@ -23,7 +23,7 @@
         </template>
       </el-table-column>
       <el-table-column label="标题" prop="title" align="center"/>
-      <el-table-column label="seo标题" prop="categoryName" align="center"/>
+      <el-table-column label="seo标题" prop="seoTitle" align="center"/>
       <el-table-column label="状态" prop="status" align="center">
         <template slot-scope="scope">
           {{ scope.row.status == 2 ? '停用' : '正常' }}
@@ -81,7 +81,7 @@ export default {
         thumb: '',
         status: '',
         createTime: '',
-        seo_title: '',
+        seoTitle: '',
       }
     }
   },
